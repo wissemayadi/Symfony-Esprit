@@ -1,0 +1,28 @@
+<h1>List des formations</h1>
+{% set x ="2cinfo4" %}
+le classe est : {{ x }}
+<br>
+<img src="{{ asset('images/imclasse.jpg') }}" alt="logo" style="margin-bottom: 15px">
+
+{% if tabFormation is empty %}
+<h5>pas de formation</h5>
+{% else %}
+{% for i in tabFormation %}
+<div style="color:blue; font-family: Arial;margin-top: 15px ;font-size: large " >
+    Ref : {{ i.ref }}
+    Titre :{{ i.Titre|upper}}
+    Description : {{i.Description}}
+    NP: {% if  i.nb_participants ==0  %}
+        <span style="color:red">Complet</span>
+    {% else %}
+        {{ i.nb_participants }}
+    {% endif %}
+    <br>
+
+    {% endfor %}
+    {% endif %}
+
+    <div style="margin-top: 20px;color:gray; font-size: large ">Nbr de formation : {{ tabFormation|length }}</div>
+
+
+</div>
