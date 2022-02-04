@@ -2,7 +2,7 @@
 <table border="1">
     <tr>
         <td>Id</td>
-        <td>FN</td>
+        <td>Name</td>
         <td>Description</td>
         <td>Enabled</td>
         <td>Level</td>
@@ -16,8 +16,9 @@
             <td>{{ s.enbaled }}</td>
             <td>{{ s.level }}</td>
             <td><a href="#">Update</a>
-                <a href="#">Remove</a>
-                <a href="#">Show</a></td>
+                <a href="{{ path('deleteStudent',{'id':s.id}) }}">Remove</a>
+                <a href="{{ path('showStudent',{'id':s.id}) }}">show</a>
+            </td>
         </tr>
     {% endfor %}
 </table>
