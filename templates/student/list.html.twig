@@ -1,4 +1,4 @@
-<a href="#">Add Student</a>
+<a href="{{ path('addStudent') }}">Add Student</a>
 <table border="1">
     <tr>
         <td>Id</td>
@@ -6,7 +6,9 @@
         <td>Description</td>
         <td>Enabled</td>
         <td>Level</td>
+        <td>Classroom</td>
         <td>Actions</td>
+
     </tr>
     {% for s in tabStudents %}
         <tr>
@@ -15,6 +17,7 @@
             <td>{{ s.description }}</td>
             <td>{{ s.enbaled }}</td>
             <td>{{ s.level }}</td>
+            <td>{{ s.classroom }}</td>
             <td><a href="#">Update</a>
                 <a href="{{ path('deleteStudent',{'id':s.id}) }}">Remove</a>
                 <a href="{{ path('showStudent',{'id':s.id}) }}">show</a>
