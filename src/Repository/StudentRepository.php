@@ -47,4 +47,15 @@ class StudentRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function  orderByFirstName(){
+        $qb=$this->createQueryBuilder('s')->orderBy('s.firstName','DESC')->setMaxResults('2');
+        return $qb->getQuery()->getResult();
+    }
+    public function findEnabledStudent(){
+      $qb=$this->createQueryBuilder('s');
+      $qb->where('s.enbaled=:x');
+      $qb->setParameter('x',true);
+      return $qb->getQuery()->getResult();
+
+    }
 }
