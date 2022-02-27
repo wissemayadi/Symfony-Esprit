@@ -111,5 +111,9 @@ class Student
         return $this;
     }
 
+    public function __toString()
+    {
+        return(string)$this->getFirstName();
+    }
 
 }

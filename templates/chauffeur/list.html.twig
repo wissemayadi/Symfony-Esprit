@@ -1,0 +1,31 @@
+
+
+<p>Ajouter chauffeur</p>
+<a href="{{ path('addchauffeur')}}">add</a>
+<p>List chauffeur</p>
+
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Nom</td>
+        <td>Prenom</td>
+
+
+
+    </tr>
+    {% for ch in tabChauffeur %}
+        <tr>
+            <td>{{ ch.id }}</td>
+            <td>{{ ch.nom }}</td>
+            <td>{{ ch.prenom}}</td>
+
+
+            <td><a href="{{ path('updateChauffeur',{'id':ch.id}) }}">Update</a>
+                <a href="{{ path('deleteVoiture',{'id':ch.id}) }}">Remove</a>
+                <a href="#">show</a>
+
+            </td>
+
+        </tr>
+    {% endfor %}
+</table><br>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Club;
+use App\Form\SearchStudentType;
 use App\Form\StudentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,12 +24,29 @@ class StudentController extends AbstractController
     /**
      * @Route("/listStudent",name="students")
      */
-    public function listStudent()
+    public function listStudent(Request $request)
     {
+
         $students= $this->getDoctrine()->getRepository(Student::class)->findAll();
         $studentsByFirstName=$this->getDoctrine()->getRepository(Student::class)->orderByFirstName();
         $findEnabled=$this->getDoctrine()->getRepository(Student::class)->findEnabledStudent();
-        return $this->render("student/list.html.twig",array('tabStudents'=>$students,'triStudent'=>$studentsByFirstName,'enabledS'=>$findEnabled));
+
+        $form=$this->createForm(SearchStudentType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $firstName= $form->getData();
+            $result= $this->getDoctrine()->getRepository(Student::class)->searchStudent($firstName);
+            return $this->render("student/list.html.twig",
+                array('tabStudents'=>$result,
+                    'tabStudentsByFirstName'=>$studentsByFirstName,
+                    'searchForm'=>$form->createView(),
+                    'enabledS'=>$findEnabled
+                ));
+        }
+        return $this->render("student/list.html.twig",array('tabStudents'=>$students,'tabStudentsByFirstName'=>$studentsByFirstName,'enabledS'=>$findEnabled,'searchForm'=>$form->createView()));
+
+
+
     }
     /**
      * @Route("/showStudent/{id}", name="showStudent")

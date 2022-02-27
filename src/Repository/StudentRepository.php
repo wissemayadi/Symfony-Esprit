@@ -58,4 +58,13 @@ class StudentRepository extends ServiceEntityRepository
       return $qb->getQuery()->getResult();
 
     }
+
+    public function SearchStudent($firstName)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.firstName LIKE :x')
+            ->setParameter('x', '%'.$firstName.'%')
+            ->getQuery()
+            ->execute();
+    }
 }
